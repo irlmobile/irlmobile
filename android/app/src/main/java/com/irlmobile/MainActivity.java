@@ -3,7 +3,7 @@ package com.irlmobile;
 import com.facebook.react.ReactActivity;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.AirMaps.AirPackage;
-import com.burnweb.rnwebview.RNWebViewPackage;
+import com.magus.fblogin.FacebookLoginPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -40,7 +40,7 @@ public class MainActivity extends ReactActivity {
             new MainReactPackage(),
             new VectorIconsPackage(),
             new AirPackage(),
-            new RNWebViewPackage()
+            new FacebookLoginPackage()
         );
     }
 }

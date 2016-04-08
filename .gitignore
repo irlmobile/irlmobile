@@ -34,5 +34,5 @@ node_modules/
 npm-debug.log
 
 .env
-android/app/src/main/AndroidManifest.xml
+
 android/app/src/main/res/values/strings.xml
