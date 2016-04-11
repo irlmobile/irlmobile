@@ -14,20 +14,18 @@ var CreateEventComponent = React.createClass({
   
   render: function() {
     var context = this;
-    console.log('CREATE EVENT PROPS', this.props);
     return (
-      
         <View style={styles.toolbar}>
           <TouchableOpacity onPress={function() {
             context.props.navigator.pop()}}>
             <Text style={styles.toolbarButton}>
-              <Icon name="arrow-left" size={20} color="black"/>
+              <Icon name="arrow-left" size={20} color="white"/>
             </Text>
           </TouchableOpacity>
           <Text style={styles.toolbarTitle}>This is the title</Text>
           <TouchableOpacity>
             <Text style={styles.toolbarButton}>
-              <Icon name="home" size={20} color="black"/>
+              <Icon name="home" size={20} color="white"/>
             </Text>
           </TouchableOpacity>
         </View>
@@ -38,7 +36,7 @@ var CreateEventComponent = React.createClass({
 
 var styles = StyleSheet.create({
   toolbar:{
-    backgroundColor:'green',
+    backgroundColor:'#ADB0D8',
     flexDirection:'row',
     height: 9 * vh,
     paddingTop: 3 * vh,

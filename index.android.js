@@ -29,11 +29,15 @@ var {
 
 
 var irlMobile = React.createClass({
-  
+  configureScene: function (route, routeStack) {
+    return Navigator.SceneConfigs.FloatFromBottom;
+  },
+
   render: function() {
     return (
       <View style={{ flex: 1}}>
         <Navigator
+          configureScene={this.configureScene}
           initialRoute={{component: 'RouteComponent'}}
           renderScene={this.renderScene}
         />

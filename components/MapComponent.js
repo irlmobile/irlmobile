@@ -78,7 +78,7 @@ var MapComponent = React.createClass({
 
 var styles = StyleSheet.create({
   createButton: {
-    top: 3 * vh,
+    top: 75 * vh,
     left: 85 * vw,
     width: 40,
     height: 40,
