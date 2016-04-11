@@ -12,6 +12,7 @@ var MenuBarComponent = require('./components/MenuBarComponent.js');
 var ProfileComponent = require('./components/ProfileComponent.js');
 var SearchComponent = require('./components/SearchComponent.js');
 var FeedComponent = require('./components/FeedComponent.js');
+var CreateEventComponent = require('./components/CreateEventComponent.js');
 var RouteComponent = require('./components/RouteComponent.js');
 
 
@@ -51,9 +52,9 @@ var irlMobile = React.createClass({
         <MapComponent navigator={navigator} />
       )
     }
-    if(route.component === 'FeedComponent') {
+    if(route.component === 'CreateEventComponent') {
       return (
-        <FeedComponent />
+        <CreateEventComponent navigator={navigator}/>
       )
     }
   }

@@ -59,11 +59,10 @@ var MapComponent = React.createClass({
         </MapView>
         <View style={styles.createButton}>
           <TouchableOpacity onPress={function () {
-            console.log('this PROPSSS', context.props.navigator);
             context.props.navigator.push({
-            component: 'FeedComponent',
+            component: 'CreateEventComponent',
             passProps: {
-              name: 'name'
+              navigator: context.props.navigator
             }
           })}}>
             <Text style={styles.createButtonText}>
