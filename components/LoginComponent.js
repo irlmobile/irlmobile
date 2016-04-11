@@ -5,10 +5,10 @@ var FBLogin = require('react-native-facebook-login');
 
 
 var {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
+  Image,
   Navigator,
   TouchableOpacity,
   Component
@@ -22,20 +22,33 @@ var myButton = (
 
 
 var LoginComponent = React.createClass({
+  getInitialState: function() {
+    return {
+      image: ''
+    }
+  },
+  
   render: function() {
     return (
-      <View>
+      <View style={styles.fbButton}>
         
         <FBLogin
-          onLogin={function(e){console.log(e)}}
+          onLogin={function(e){
+            console.log(e);
+          }}
           onLogout={function(e){console.log(e)}}
           onCancel={function(e){console.log(e)}}
           onPermissionsMissing={function(e){console.log(e)}}
         />
-        
       </View>
     );
   }
+});
+
+var styles = StyleSheet.create({
+  fbButton: {
+    flex:1,
+  },
 });
 
 module.exports = LoginComponent;

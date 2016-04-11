@@ -3,7 +3,6 @@ var React = require('react-native');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
 var {
-  AppRegistry,
   StyleSheet,
   Text,
   View,

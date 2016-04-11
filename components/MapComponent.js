@@ -1,22 +1,10 @@
-'use strict';
-
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var MapView = require('react-native-maps');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
 
-var myIcon = (<Icon name="bars" size={20} color="white"/>);
-
-
-// var myButton = (
-//   <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook}>
-//     Login with Facebook
-//   </Icon.Button>
-// );
-
 var {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -25,44 +13,64 @@ var {
   Component
 } = React;
 
-var location = { latitude: 37.78825, longitude: -122.4324 };
+// var location = { latitude: 37.78825, longitude: -122.4324 };
 
 var MapComponent = React.createClass({
   getInitialState: function() {
     return {
-      menubar: false
+      initialPosition: {}
     };
   },
 
-  menuBar: function() {
-    if(!this.state.menubar) {
-      this.setState({menubar: true});
-    }
-    else {
-      this.setState({menubar: false});
-    }
+  componentDidMount: function() {
+    var context = this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var location = {
+        latitude: position.coords.latitude, 
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      };
+      context.setState({initialPosition: location});
+
+    }, function(err) {
+      console.log('error getting current geolocation', err);
+    },
+    { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+  },
+
+  renderCreate: function() {
+    console.log('THISSS PROPS', this.props);
   },
 
   render: function() {
+    var context = this;
     return (
       <View>
+        
         <MapView
           style={ styles.map }
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }} >
+          initialRegion={this.state.initialPosition} >
           <MapView.Marker
-            coordinate={location}
+            coordinate={this.state.initialPosition}
             title='testing marker'
             description='testing testing'
           />
         </MapView>
-
-        {this.state.menubar ? <MenuBar navigator={navigator}/> : null}
-
+        <View style={styles.createButton}>
+          <TouchableOpacity onPress={function () {
+            console.log('this PROPSSS', context.props.navigator);
+            context.props.navigator.push({
+            component: 'FeedComponent',
+            passProps: {
+              name: 'name'
+            }
+          })}}>
+            <Text style={styles.createButtonText}>
+              <Icon name="plus" size={20} color="white"/>
+            </Text>
+          </TouchableOpacity>  
+        </View>
       </View>
     );
   }
@@ -70,6 +78,18 @@ var MapComponent = React.createClass({
 
 
 var styles = StyleSheet.create({
+  createButton: {
+    top: 3 * vh,
+    left: 85 * vw,
+    width: 40,
+    height: 40,
+    backgroundColor: '#ADB0D8',
+    borderRadius: 50,
+  },
+  createButtonText: {
+    margin: 10,
+    textAlign: 'center',
+  },
   map: {
     position: 'absolute',
     top: 0,
@@ -77,23 +97,6 @@ var styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 100 * vh,
-  },
-  menubar: {
-    width: 25 * vw,
-    height: 100 * vh,
-    backgroundColor: '#000000',
-    opacity: 0.5,
-  },
-  menubarText: {
-    textAlign:'center',
-    fontWeight:'bold',
-    marginTop: 10,
-    padding: 5,
-    color: '#fff',
-    opacity: 1,
-  },
-  containerWebView: {
-    flex: 1,
   },
 });
 

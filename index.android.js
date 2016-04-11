@@ -1,8 +1,9 @@
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
-var MapView = require('react-native-maps');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+
+
 
 var LoginComponent = require('./components/LoginComponent.js');
 var TabBarComponent = require('./components/TabBarComponent.js');
@@ -11,6 +12,7 @@ var MenuBarComponent = require('./components/MenuBarComponent.js');
 var ProfileComponent = require('./components/ProfileComponent.js');
 var SearchComponent = require('./components/SearchComponent.js');
 var FeedComponent = require('./components/FeedComponent.js');
+var RouteComponent = require('./components/RouteComponent.js');
 
 
 var {
@@ -29,17 +31,31 @@ var irlMobile = React.createClass({
   
   render: function() {
     return (
-      
-        <ScrollableTabView>
-          <LoginComponent tabLabel='Login' />
-          <MapComponent tabLabel='Map' />
-          <SearchComponent tabLabel='Search' />
-          <FeedComponent tabLabel='Feed' />
-          <ProfileComponent tabLabel='Profile' />
-          
-        </ScrollableTabView>  
-     
+      <View style={{ flex: 1}}>
+        <Navigator
+          initialRoute={{component: 'RouteComponent'}}
+          renderScene={this.renderScene}
+        />
+      </View>   
     );
+  },
+
+  renderScene: function(route, navigator) {
+    if(route.component === 'RouteComponent') {
+      return (
+        <RouteComponent navigator={navigator}/>
+      )
+    }
+    if(route.component === 'MapComponent') {
+      return (
+        <MapComponent navigator={navigator} />
+      )
+    }
+    if(route.component === 'FeedComponent') {
+      return (
+        <FeedComponent />
+      )
+    }
   }
 });
 
