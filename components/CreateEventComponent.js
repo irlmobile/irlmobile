@@ -10,14 +10,25 @@ var {
   Text,
   View,
   TouchableOpacity,
+  Animated,
   Component
 } = React;
 
 var CreateEventComponent = React.createClass({
   getInitialState: function() {
+    var initialLocation = this.props.initLocation;
     return {
       address: '',
-      location: {}
+      coordinate: new Animated.Region({
+        latitude: initialLocation.latitude,
+        longitude: initialLocation.longitude,
+      }),
+      location: {
+        latitude: initialLocation.latitude,
+        longitude: initialLocation.longitude, 
+        latitudeDelta: initialLocation.latitudeDelta,
+        longitudeDelta: initialLocation.longitudeDelta,
+      }
     };
   },
 
@@ -28,14 +39,21 @@ var CreateEventComponent = React.createClass({
     console.log('details', details);
     this.setState({
       address: details.formatted_address,
-      location: {
+      coordinate: {
         latitude: placeLat,
         longitude: placeLng,
+      },
+      location: {
+        latitude: placeLat,
+        longitude: placeLng, 
+        latitudeDelta: this.props.initLocation.latitudeDelta,
+        longitudeDelta: this.props.initLocation.longitudeDelta,
       }
     }, function() {
       console.log(context.state.address);
     });
   },
+
 
   render: function() {
     var context = this;
@@ -43,6 +61,7 @@ var CreateEventComponent = React.createClass({
       key: Config.googlemap_key, 
       language: 'en' 
     };
+    console.log(this.state.coordinate);
     return (
       <View>
         <View style={styles.toolbar}>
@@ -61,9 +80,10 @@ var CreateEventComponent = React.createClass({
         </View>
         <MapView
           style={ styles.map }
-          initialRegion={this.props.initLocation} >
-          <MapView.Marker
-            coordinate={this.props.initLocation}
+          region={this.state.location} 
+        >
+          <MapView.Marker.Animated
+            coordinate={this.state.coordinate}
             title='testing marker'
             description='testing testing'
           />
