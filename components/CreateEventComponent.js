@@ -61,7 +61,6 @@ var CreateEventComponent = React.createClass({
       key: Config.googlemap_key, 
       language: 'en' 
     };
-    console.log(this.state.coordinate);
     return (
       <View>
         <View style={styles.toolbar}>

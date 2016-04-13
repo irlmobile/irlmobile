@@ -28,8 +28,8 @@ var MapComponent = React.createClass({
       var location = {
         latitude: position.coords.latitude, 
         longitude: position.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.022,
+        longitudeDelta: 0.022,
       };
       context.setState({initialPosition: location});
 
