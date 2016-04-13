@@ -62,7 +62,8 @@ var MapComponent = React.createClass({
             context.props.navigator.push({
             component: 'CreateEventComponent',
             passProps: {
-              navigator: context.props.navigator
+              navigator: context.props.navigator,
+              initLocation: context.state.initialPosition,
             }
           })}}>
             <Text style={styles.createButtonText}>

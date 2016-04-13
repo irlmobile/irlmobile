@@ -58,7 +58,7 @@ var irlMobile = React.createClass({
     }
     if(route.component === 'CreateEventComponent') {
       return (
-        <CreateEventComponent navigator={navigator}/>
+        <CreateEventComponent navigator={navigator} initLocation={route.passProps.initLocation}/>
       )
     }
   }

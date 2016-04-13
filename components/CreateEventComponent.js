@@ -2,6 +2,7 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var {GooglePlacesAutocomplete} = require('react-native-google-places-autocomplete');
+var MapView = require('react-native-maps');
 var Config = require('react-native-config');
 
 var {
@@ -58,7 +59,15 @@ var CreateEventComponent = React.createClass({
             </Text>
           </TouchableOpacity>
         </View>
-
+        <MapView
+          style={ styles.map }
+          initialRegion={this.props.initLocation} >
+          <MapView.Marker
+            coordinate={this.props.initLocation}
+            title='testing marker'
+            description='testing testing'
+          />
+        </MapView>
         <GooglePlacesAutocomplete
           placeholder='Search'
           minLength={2}
@@ -117,6 +126,14 @@ var styles = StyleSheet.create({
     textAlign:'center',
     fontWeight:'bold',
     flex:1,
+  },
+  map: {
+    position: 'absolute',
+    top: 8 * vh,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 30 * vh,
   },
 });
 
