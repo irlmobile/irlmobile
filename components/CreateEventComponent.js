@@ -42,7 +42,6 @@ var CreateEventComponent = React.createClass({
       key: Config.googlemap_key, 
       language: 'en' 
     };
-    console.log('QUERY OPTIONS', queryOptions);
     return (
       <View>
         <View style={styles.toolbar}>
