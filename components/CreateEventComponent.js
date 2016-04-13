@@ -2,6 +2,7 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var {GooglePlacesAutocomplete} = require('react-native-google-places-autocomplete');
+var Config = require('react-native-config');
 
 var {
   StyleSheet,
@@ -12,9 +13,36 @@ var {
 } = React;
 
 var CreateEventComponent = React.createClass({
-  
+  getInitialState: function() {
+    return {
+      address: '',
+      location: {}
+    };
+  },
+
+  getPlaceDetails: function(data, details) {
+    var context = this;
+    var placeLat = details.geometry.access_points[0].location.lat;
+    var placeLng = details.geometry.access_points[0].location.lng;
+    console.log('details', details);
+    this.setState({
+      address: details.formatted_address,
+      location: {
+        latitude: placeLat,
+        longitude: placeLng,
+      }
+    }, function() {
+      console.log(context.state.address);
+    });
+  },
+
   render: function() {
     var context = this;
+    var queryOptions = { 
+      key: Config.googlemap_key, 
+      language: 'en' 
+    };
+    console.log('QUERY OPTIONS', queryOptions);
     return (
       <View>
         <View style={styles.toolbar}>
@@ -38,16 +66,12 @@ var CreateEventComponent = React.createClass({
           autoFocus={false}
           fetchDetails={true}
           onPress={(data, details = null) => {
-            console.log(data);
-            console.log(details);
+            context.getPlaceDetails(data, details);
           }}
           getDefaultValue={() => {
             return '';
           }}
-          query={{
-            key: 'AIzaSyCWCKYlwOoXrWa4YCeyTGxlwX9GRZCTFW4',
-            language: 'en'
-          }}
+          query={queryOptions}
           styles={{
             description: {
               fontWeight: 'bold',
@@ -61,9 +85,8 @@ var CreateEventComponent = React.createClass({
           currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch' 
           GooglePlacesSearchQuery={{
-            
             rankby: 'distance',
-            types: 'food',
+            types: 'restaurant',
           }}
 
 

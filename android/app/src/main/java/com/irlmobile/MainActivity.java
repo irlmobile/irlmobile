@@ -1,6 +1,7 @@
 package com.irlmobile;
 
 import com.facebook.react.ReactActivity;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.AirMaps.AirPackage;
 import com.magus.fblogin.FacebookLoginPackage;
@@ -38,6 +39,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new ReactNativeConfigPackage(),
             new VectorIconsPackage(),
             new AirPackage(),
             new FacebookLoginPackage()

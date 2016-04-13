@@ -32,6 +32,7 @@
 		1159EB8CD4864553BF3C0D80 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCD1D81DE6004FFCBE768A7B /* Octicons.ttf */; };
 		9105E54E55BD4916AE3793C9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DBFB20B73E340F0A2CD65F3 /* Zocial.ttf */; };
 		60F2BB3BA9BA41DAB5237AC0 /* libRCTFBLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7AB09BE6A2403D99D0C987 /* libRCTFBLogin.a */; };
+		42E867E1257C4C9EB1D2F44E /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FECA8D467264D90B47201CC /* libReactNativeConfig.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,8 @@
 		1DBFB20B73E340F0A2CD65F3 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5C60B598A9A84D1798813E6F /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBLogin.xcodeproj"; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5D7AB09BE6A2403D99D0C987 /* libRCTFBLogin.a */ = {isa = PBXFileReference; name = "libRCTFBLogin.a"; path = "libRCTFBLogin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E3588D5C070B4FC8B079C959 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeConfig.xcodeproj"; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0FECA8D467264D90B47201CC /* libReactNativeConfig.a */ = {isa = PBXFileReference; name = "libReactNativeConfig.a"; path = "libReactNativeConfig.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,7 @@
 				686E9DF5BE3943CCA5FD6C79 /* libAirMaps.a in Frameworks */,
 				907AF059D569471F9D880629 /* libRNVectorIcons.a in Frameworks */,
 				60F2BB3BA9BA41DAB5237AC0 /* libRCTFBLogin.a in Frameworks */,
+				42E867E1257C4C9EB1D2F44E /* libReactNativeConfig.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +306,7 @@
 				3C6B7EAC5DDA4E74B57717A5 /* AirMaps.xcodeproj */,
 				C7790179186D4D429A66B0A9 /* RNVectorIcons.xcodeproj */,
 				5C60B598A9A84D1798813E6F /* RCTFBLogin.xcodeproj */,
+				E3588D5C070B4FC8B079C959 /* ReactNativeConfig.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -671,6 +677,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
@@ -687,6 +694,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-maps\ios\AirMaps/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-facebook-login\RCTFBLogin/**",
+					"$(SRCROOT)\..\node_modules\react-native-config\ios\ReactNativeConfig",
 				);
 				INFOPLIST_FILE = "irlMobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -706,6 +714,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-maps\ios\AirMaps/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-facebook-login\RCTFBLogin/**",
+					"$(SRCROOT)\..\node_modules\react-native-config\ios\ReactNativeConfig",
 				);
 				INFOPLIST_FILE = "irlMobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -755,6 +764,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-maps\ios\AirMaps/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-facebook-login\RCTFBLogin/**",
+					"$(SRCROOT)\..\node_modules\react-native-config\ios\ReactNativeConfig",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -798,6 +808,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-maps\ios\AirMaps/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-facebook-login\RCTFBLogin/**",
+					"$(SRCROOT)\..\node_modules\react-native-config\ios\ReactNativeConfig",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
