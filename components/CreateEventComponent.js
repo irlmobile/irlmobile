@@ -10,6 +10,7 @@ var Config = require('react-native-config');
 var {
   StyleSheet,
   Text,
+  TextInput,
   View,
   TouchableOpacity,
   Animated,
@@ -33,6 +34,8 @@ var CreateEventComponent = React.createClass({
       },
       markerHeading: 'My Location',
       markerDescription: '',
+      eventName: '',
+      eventDesc: '',
     };
   },
 
@@ -58,6 +61,18 @@ var CreateEventComponent = React.createClass({
     });
   },
 
+  onEventNameChange: function(text) {
+    this.setState({
+      eventName: text
+    });
+  },
+
+  onEventDescChange: function(text) {
+    console.log(text);
+    this.setState({
+      eventDesc: text
+    });
+  },
 
   render: function() {
     var context = this;
@@ -74,12 +89,7 @@ var CreateEventComponent = React.createClass({
               <Icon name="arrow-left" size={20} color="white"/>
             </Text>
           </TouchableOpacity>
-          <Text style={styles.toolbarTitle}>This is the title</Text>
-          <TouchableOpacity>
-            <Text style={styles.toolbarButton}>
-              <Icon name="home" size={20} color="white"/>
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.toolbarTitle}>Create an Event</Text>
         </View>
         <MapView
           style={ styles.map }
@@ -112,20 +122,22 @@ var CreateEventComponent = React.createClass({
             },
           }}
 
-          currentLocation={true} 
-          currentLocationLabel="Current location"
-          nearbyPlacesAPI='GooglePlacesSearch' 
-          GooglePlacesSearchQuery={{
-            rankby: 'distance',
-            types: 'restaurant',
-          }}
-
-
           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
 
         />
 
-
+      <TextInput 
+        style={styles.textInput} 
+        placeholder='Event Name' 
+        onChangeText={this.onEventNameChange}
+        value={this.state.eventName}
+      />
+      <TextInput 
+        style={styles.textInput} 
+        placeholder='Event Description'
+        onChangeText={this.onEventDescChange}
+        value={this.state.eventDesc}
+      />
       </View> 
     ); 
   }
@@ -140,7 +152,7 @@ var styles = StyleSheet.create({
 
   },
   toolbarButton:{
-    width: 50,
+    width: 10 * vw,
     color:'#fff',
     textAlign:'center',
   },
@@ -149,6 +161,7 @@ var styles = StyleSheet.create({
     textAlign:'center',
     fontWeight:'bold',
     flex:1,
+    marginRight: 25,
   },
   map: {
     position: 'absolute',
@@ -158,6 +171,12 @@ var styles = StyleSheet.create({
     bottom: 0,
     height: 30 * vh,
   },
+  textInput: {
+    top: 30 * vh,
+    height: 7 * vh,
+    borderColor: 'gray',
+    borderWidth: 1
+  }
 });
 
 module.exports = CreateEventComponent;
