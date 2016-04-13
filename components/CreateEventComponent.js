@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
@@ -28,7 +30,9 @@ var CreateEventComponent = React.createClass({
         longitude: initialLocation.longitude, 
         latitudeDelta: initialLocation.latitudeDelta,
         longitudeDelta: initialLocation.longitudeDelta,
-      }
+      },
+      markerHeading: 'My Location',
+      markerDescription: '',
     };
   },
 
@@ -48,9 +52,9 @@ var CreateEventComponent = React.createClass({
         longitude: placeLng, 
         latitudeDelta: this.props.initLocation.latitudeDelta,
         longitudeDelta: this.props.initLocation.longitudeDelta,
-      }
-    }, function() {
-      console.log(context.state.address);
+      },
+      markerHeading: details.name,
+      markerDescription: details.formatted_address,
     });
   },
 
@@ -83,8 +87,8 @@ var CreateEventComponent = React.createClass({
         >
           <MapView.Marker.Animated
             coordinate={this.state.coordinate}
-            title='testing marker'
-            description='testing testing'
+            title={this.state.markerHeading}
+            description={this.state.markerDescription}
           />
         </MapView>
         <GooglePlacesAutocomplete
