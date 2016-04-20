@@ -93,8 +93,8 @@ var CreateEventComponent = React.createClass({
         }
       })
     })
-    .then(function(res) {
-      console.log('RESSSSSSSSSS', res);
+    .then(function(data) {
+      console.log('DATA', data);
     })
     .catch(function(err) {
       console.log('error', err);
