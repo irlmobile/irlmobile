@@ -50,7 +50,7 @@ var MapComponent = React.createClass({
         
         <MapView
           style={ styles.map }
-          initialRegion={this.state.initialPosition} >
+          region={this.state.initialPosition} >
           <MapView.Marker
             coordinate={this.state.initialPosition}
             title='testing marker'

@@ -3,7 +3,7 @@ var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
-
+//
 // var TabBarComponent = require('./components/TabBarComponent.js');
 var MapComponent = require('./MapComponent.js');
 // var MenuBarComponent = require('./components/MenuBarComponent.js');

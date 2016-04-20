@@ -3,6 +3,7 @@ var parser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 
+
 var app = express();
 
 var port = process.env.PORT || 8000;
@@ -18,3 +19,5 @@ app.listen(8000, function() {
 mongoose.connect('mongodb://localhost/irlmobile');
 
 module.exports = app;
+
+var routes = require('./routes.js');

@@ -14,11 +14,19 @@ app.get('/api/spots', function(req, res) {
 });
 
 app.post('/api/spots', function(req, res) {
-  Spot.create({req.body}, function(err, spot) {
+  console.log('ROUTED TO SPOT CREATE', req.body.coordinate);
+  Spot.create({
+    name: req.body.name,
+    address: req.body.address,
+    coordinates: {
+      latitude: req.body.coordinates.latitude,
+      longitude: req.body.coordinates.longitude
+    }  
+  }, function(err, spot) {
     if (err) {
       return console.error('Error creating spot:', err);
     }
-    console.log('Spot created:', spots);
+    console.log('Spot created:', spot);
     res.json(spot);
   });
 });
@@ -26,12 +34,12 @@ app.post('/api/spots', function(req, res) {
 app.post('/api/users', function(req, res) {
   User.findOne({email: req.body.email}, function(err, user) {
     if (!user) {
-      User.create({req.body}, function(err, user) {
+      User.create({}, function(err, user) {
         if (err) {
           return console.error('Error creating user:', err);
         }
         res.json(user);
-      })
+      });
     } else {
       return console.log('User already exists');
     }

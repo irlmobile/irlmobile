@@ -68,9 +68,36 @@ var CreateEventComponent = React.createClass({
   },
 
   onEventDescChange: function(text) {
-    console.log(text);
     this.setState({
       eventDesc: text
+    });
+  },
+
+  createSpot: function() {
+    var context = this;
+    console.log('create spot');
+    console.log('coordinate', context.state.coordinate);
+    console.log('location', context.state.location);
+    fetch('http://192.168.1.15:8000/api/spots', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: context.state.eventName,
+        address: context.state.address,
+        coordinates: {
+          latitude: context.state.location.latitude,
+          longitude: context.state.location.longitude
+        }
+      })
+    })
+    .then(function(data) {
+      console.log('DATA', data);
+    })
+    .catch(function(err) {
+      console.log('error', err);
     });
   },
 
@@ -138,6 +165,13 @@ var CreateEventComponent = React.createClass({
         onChangeText={this.onEventDescChange}
         value={this.state.eventDesc}
       />
+      <View style={styles.submit}>
+        <TouchableOpacity onPress={this.createSpot}>
+          <Text>
+            Submit
+          </Text>
+        </TouchableOpacity>
+      </View>
       </View> 
     ); 
   }
@@ -173,9 +207,12 @@ var styles = StyleSheet.create({
   },
   textInput: {
     top: 30 * vh,
-    height: 7 * vh,
+    height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+  },
+  submit: {
+    top: 60 * vh,
   }
 });
 
