@@ -1,6 +1,7 @@
 var express = require('express');
 var parser = require('body-parser');
 var morgan = require('morgan');
+var mongoose = require('mongoose');
 
 var app = express();
 
@@ -13,3 +14,7 @@ app.use(parser.json());
 app.listen(8000, function() {
   console.log('Server listening on port ' + port);
 });
+
+mongoose.connect('mongodb://localhost/irlmobile');
+
+module.exports = app;
