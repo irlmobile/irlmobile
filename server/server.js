@@ -19,3 +19,5 @@ app.listen(8000, function() {
 mongoose.connect('mongodb://localhost/irlmobile');
 
 module.exports = app;
+
+var routes = require('./routes.js');
