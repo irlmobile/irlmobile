@@ -68,7 +68,6 @@ var CreateEventComponent = React.createClass({
   },
 
   onEventDescChange: function(text) {
-    console.log(text);
     this.setState({
       eventDesc: text
     });
@@ -138,6 +137,7 @@ var CreateEventComponent = React.createClass({
         onChangeText={this.onEventDescChange}
         value={this.state.eventDesc}
       />
+      
       </View> 
     ); 
   }
@@ -173,7 +173,7 @@ var styles = StyleSheet.create({
   },
   textInput: {
     top: 30 * vh,
-    height: 7 * vh,
+    height: 40,
     borderColor: 'gray',
     borderWidth: 1
   }
