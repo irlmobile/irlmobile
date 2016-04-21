@@ -41,9 +41,9 @@ var CreateEventComponent = React.createClass({
 
   getPlaceDetails: function(data, details) {
     var context = this;
-    var placeLat = details.geometry.access_points[0].location.lat;
-    var placeLng = details.geometry.access_points[0].location.lng;
-    console.log('details', details);
+    var placeLat = details.geometry.location.lat;
+    var placeLng = details.geometry.location.lng;
+    
     this.setState({
       address: details.formatted_address,
       coordinate: {
@@ -75,10 +75,7 @@ var CreateEventComponent = React.createClass({
 
   createSpot: function() {
     var context = this;
-    console.log('create spot');
-    console.log('coordinate', context.state.coordinate);
-    console.log('location', context.state.location);
-    fetch('http://192.168.1.15:8000/api/spots', {
+    fetch(Config.ip_address + '/api/spots', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -94,7 +91,8 @@ var CreateEventComponent = React.createClass({
       })
     })
     .then(function(data) {
-      console.log('DATA', data);
+      console.log('DATA', data._bodyInit);
+      context.props.navigator.pop();
     })
     .catch(function(err) {
       console.log('error', err);

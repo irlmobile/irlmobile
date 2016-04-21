@@ -2,7 +2,7 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
-
+var Config = require('react-native-config');
 
 
 var LoginComponent = require('./components/LoginComponent.js');
@@ -29,6 +29,7 @@ var {
 
 
 var irlMobile = React.createClass({
+
   configureScene: function (route, routeStack) {
     return Navigator.SceneConfigs.FloatFromBottom;
   },
@@ -53,7 +54,7 @@ var irlMobile = React.createClass({
     }
     if(route.component === 'MapComponent') {
       return (
-        <MapComponent navigator={navigator} />
+        <MapComponent navigator={navigator}/>
       )
     }
     if(route.component === 'CreateEventComponent') {
@@ -64,48 +65,6 @@ var irlMobile = React.createClass({
   }
 });
 
-
-var NavigationBarRouteMapper = {
-  
-  LeftButton: function (route, navigator, index, navState) {
-    return (
-      <TouchableOpacity 
-        style={{flex: 1, justifyContent: 'center'}}
-      >
-        <Text style={{color: 'white', margin: 10}}>
-          <Icon name="bars" size={20} color="white"/>
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-
-  RightButton: function (route, navigator, index, navState) {
-    return (
-       <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
-          onPress={function () {navigator.push({
-            component: 'MapComponent',
-            passProps: {
-              name: 'name'
-            }
-          })}}>
-        <Text style={{color: 'white', margin: 10}}>
-          <Icon name="home" size={20} color="white"/>
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-
-  Title: function (route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
-        <Text style={{color: 'white', margin: 10, fontSize: 18}}>
-          asdfasdf
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-
-};
 
 var styles = StyleSheet.create({
   toolbar:{
