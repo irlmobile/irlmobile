@@ -2,7 +2,7 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
-var Config = require('react-native-config');
+
 
 
 var LoginComponent = require('./components/LoginComponent.js');

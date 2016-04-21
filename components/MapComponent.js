@@ -13,8 +13,6 @@ var {
   Component
 } = React;
 
-// var location = { latitude: 37.78825, longitude: -122.4324 };
-
 var MapComponent = React.createClass({
   getInitialState: function() {
     return {
@@ -40,8 +38,6 @@ var MapComponent = React.createClass({
   },
 
   componentDidMount: function() {
-    
-
     var context = this;
     fetch(Config.ip_address + '/api/spots', {
       method: 'GET',
@@ -51,7 +47,6 @@ var MapComponent = React.createClass({
       },
     })
     .then(function(data) {
-      console.log('DATA', data._bodyInit);
       var parsedData = JSON.parse(data._bodyInit);
       context.setState({spots: parsedData});
       
@@ -83,7 +78,7 @@ var MapComponent = React.createClass({
           {spots}
           <MapView.Marker
             coordinate={this.state.initialPosition}
-            title='testing marker'
+            title='My Location'
             description='testing testing'
           />
         </MapView>
