@@ -51,15 +51,7 @@ var LoginComponent = React.createClass({
 
     })
     .catch(function(err) {
-      console.log('error', err);
-      AsyncStorage.setItem('token', data.token, function(err, data) {
-        console.log('error setting token on fb login', err);
-        console.log('data for fb login async storage', data);
-      });
-      context.props.navigator.push({
-        component: 'RouteComponent',
-        
-      });
+      console.log('error', err);  
     });
   },
 

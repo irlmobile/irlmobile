@@ -28,12 +28,6 @@ var {
 
 
 var irlMobile = React.createClass({
-  getInitialState: function() {
-    return {
-      loggedIn: false,
-    };
-  },
-
   configureScene: function (route, routeStack) {
     return Navigator.SceneConfigs.FloatFromBottom;
   },
@@ -62,7 +56,7 @@ var irlMobile = React.createClass({
         }
       });
       console.log('TOKEN', checkToken); 
-      if(checkToken) {
+      if(typeof checkToken === 'string') {
         return (
           <RouteComponent navigator={navigator} />
         )

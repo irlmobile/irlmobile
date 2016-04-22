@@ -33,7 +33,7 @@ var RouteComponent = React.createClass({
           <MapComponent tabLabel='Map' navigator={this.props.navigator}/>
           <SearchComponent tabLabel='Search' />
           <FeedComponent tabLabel='Feed' />
-          <ProfileComponent tabLabel='Profile' />
+          <ProfileComponent tabLabel='Profile' navigator={this.props.navigator}/>
       </ScrollableTabView>  
       
     );
