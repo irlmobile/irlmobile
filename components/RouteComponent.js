@@ -29,7 +29,7 @@ var RouteComponent = React.createClass({
   render: function() {
     return (
       <ScrollableTabView>
-          <LoginComponent tabLabel='Login' navigator={this.props.navigator}/>
+          
           <MapComponent tabLabel='Map' navigator={this.props.navigator}/>
           <SearchComponent tabLabel='Search' />
           <FeedComponent tabLabel='Feed' />
