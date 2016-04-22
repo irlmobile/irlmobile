@@ -28,8 +28,38 @@ var {
 
 
 var irlMobile = React.createClass({
+  getInitialState: function() {
+    return {
+      loggedin: '',
+    };
+  },
+
+  componentWillMount: function() {
+    var context = this;
+    AsyncStorage.getItem('token', function(err, result) {
+      if(err) {
+        console.log('error getting token', err);
+      } else {
+        console.log('async storage token', result);
+        if(result) {
+          context.setState({loggedin: true});
+        } else {
+          context.setState({loggedin: false});
+        }
+        
+      }
+    });     
+      
+  },
+
   configureScene: function (route, routeStack) {
-    return Navigator.SceneConfigs.FloatFromBottom;
+    if(route.component === 'LoginComponent') {
+      return Navigator.SceneConfigs.FadeAndroid;
+    } 
+    if(route.component === 'CreateEventComponent') {
+      return Navigator.SceneConfigs.FloatFromBottom;
+    }
+    
   },
 
   render: function() {
@@ -47,20 +77,11 @@ var irlMobile = React.createClass({
 
   renderScene: function(route, navigator) {
     if(route.component === 'LoginComponent') {
-      var checkToken = AsyncStorage.getItem('token', function(err, result) {
-        if(err) {
-          console.log('error getting token', err);
-        } else {
-          console.log('async storage token', result);
-          return result;
-        }
-      });
-      console.log('TOKEN', checkToken); 
-      if(typeof checkToken === 'string') {
+      console.log('loggedin', this.state.loggedin);
+      if(this.state.loggedin) {
         return (
           <RouteComponent navigator={navigator} />
         )
-        
       } else {
         return (
           <LoginComponent navigator={navigator}/>
