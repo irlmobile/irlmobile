@@ -2,7 +2,7 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var MapView = require('react-native-maps');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
-
+var Config = require('react-native-config');
 
 var {
   StyleSheet,
@@ -13,16 +13,14 @@ var {
   Component
 } = React;
 
-// var location = { latitude: 37.78825, longitude: -122.4324 };
-
 var MapComponent = React.createClass({
   getInitialState: function() {
     return {
-      initialPosition: {}
+      initialPosition: {},
     };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function () {
     var context = this;
     navigator.geolocation.getCurrentPosition(function(position) {
       var location = {
@@ -39,24 +37,52 @@ var MapComponent = React.createClass({
     { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
   },
 
-  renderCreate: function() {
-    console.log('THISSS PROPS', this.props);
+  componentDidMount: function() {
+    var context = this;
+    fetch(Config.ip_address + '/api/spots', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(function(data) {
+      var parsedData = JSON.parse(data._bodyInit);
+      context.setState({spots: parsedData});
+      
+    })
+    .catch(function(err) {
+      console.log('error', err);
+    });
   },
 
   render: function() {
     var context = this;
+    if(this.state.spots) {
+      var spots = this.state.spots.map(function(spot) {
+        return (
+          <MapView.Marker
+            coordinate={spot.coordinates}
+            title={spot.name}
+            description='testing testing'
+          />
+        );
+      }, this);
+    }
     return (
       <View>
-        
+        {this.state.spots ? 
         <MapView
           style={ styles.map }
           region={this.state.initialPosition} >
+          {spots}
           <MapView.Marker
             coordinate={this.state.initialPosition}
-            title='testing marker'
+            title='My Location'
             description='testing testing'
           />
         </MapView>
+        : null }
         <View style={styles.createButton}>
           <TouchableOpacity onPress={function () {
             context.props.navigator.push({
