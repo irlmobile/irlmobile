@@ -23,7 +23,7 @@ var Profile = React.createClass({
         console.error('error removing async storage token', err);
       }
       context.props.navigator.push({
-        component: 'LoginComponent'
+        component: 'LoginComponent',
       });
     });
   },

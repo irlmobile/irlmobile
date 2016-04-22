@@ -77,7 +77,6 @@ var irlMobile = React.createClass({
 
   renderScene: function(route, navigator) {
     if(route.component === 'LoginComponent') {
-      console.log('loggedin', this.state.loggedin);
       if(this.state.loggedin) {
         return (
           <RouteComponent navigator={navigator} />
