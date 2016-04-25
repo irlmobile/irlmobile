@@ -2,9 +2,10 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var FBLogin = require('react-native-facebook-login');
-
+var Config = require('react-native-config');
 
 var {
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
@@ -14,27 +15,54 @@ var {
   Component
 } = React;
 
-var myButton = (
-  <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook}>
-    Login with Facebook
-  </Icon.Button>
-);
-
 
 var LoginComponent = React.createClass({
   getInitialState: function() {
     return {
       image: ''
-    }
+    };
   },
   
+  sendLogin: function(data) {
+    var context = this;
+    fetch(Config.ip_address + '/api/users', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.profile.name,
+        email: data.profile.email,
+        picture: data.profile.picture.data.url
+      })
+    })
+    .then(function(result) {
+      console.log('RESULT', result._bodyInit);
+      AsyncStorage.setItem('token', data.token, function(err) {
+        if(err) {
+          console.error('error setting token on fb login', err);
+        }
+      });
+      context.props.navigator.push({
+        component: 'RouteComponent',
+        
+      });
+
+    })
+    .catch(function(err) {
+      console.log('error', err);  
+    });
+  },
+
   render: function() {
+    var context = this;
     return (
       <View style={styles.fbButton}>
         
         <FBLogin
           onLogin={function(e){
-            console.log(e);
+            context.sendLogin(e);
           }}
           onLogout={function(e){console.log(e)}}
           onCancel={function(e){console.log(e)}}

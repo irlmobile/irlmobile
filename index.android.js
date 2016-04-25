@@ -3,8 +3,6 @@ var Icon = require('react-native-vector-icons/FontAwesome');
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
-
-
 var LoginComponent = require('./components/LoginComponent.js');
 var TabBarComponent = require('./components/TabBarComponent.js');
 var MapComponent = require('./components/MapComponent.js');
@@ -18,6 +16,7 @@ var RouteComponent = require('./components/RouteComponent.js');
 
 var {
   AppRegistry,
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
@@ -29,17 +28,47 @@ var {
 
 
 var irlMobile = React.createClass({
+  getInitialState: function() {
+    return {
+      loggedin: '',
+    };
+  },
+
+  componentWillMount: function() {
+    var context = this;
+    AsyncStorage.getItem('token', function(err, result) {
+      if(err) {
+        console.log('error getting token', err);
+      } else {
+        console.log('async storage token', result);
+        if(result) {
+          context.setState({loggedin: true});
+        } else {
+          context.setState({loggedin: false});
+        }
+        
+      }
+    });     
+      
+  },
 
   configureScene: function (route, routeStack) {
-    return Navigator.SceneConfigs.FloatFromBottom;
+    if(route.component === 'LoginComponent') {
+      return Navigator.SceneConfigs.FadeAndroid;
+    } 
+    if(route.component === 'CreateEventComponent') {
+      return Navigator.SceneConfigs.FloatFromBottom;
+    }
+    
   },
 
   render: function() {
+
     return (
       <View style={{ flex: 1}}>
         <Navigator
           configureScene={this.configureScene}
-          initialRoute={{component: 'RouteComponent'}}
+          initialRoute={{component: 'LoginComponent'}}
           renderScene={this.renderScene}
         />
       </View>   
@@ -47,7 +76,19 @@ var irlMobile = React.createClass({
   },
 
   renderScene: function(route, navigator) {
+    if(route.component === 'LoginComponent') {
+      if(this.state.loggedin) {
+        return (
+          <RouteComponent navigator={navigator} />
+        )
+      } else {
+        return (
+          <LoginComponent navigator={navigator}/>
+        )
+      }
+    }
     if(route.component === 'RouteComponent') {
+      
       return (
         <RouteComponent navigator={navigator}/>
       )

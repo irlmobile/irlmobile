@@ -12,7 +12,7 @@ var SpotSchema = new Schema({
 var UserSchema = new Schema({
   name: String,
   email: String,
-  picture: Buffer
+  picture: String
 });
 
 module.exports = mongoose.model('Spot', SpotSchema);
